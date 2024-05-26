@@ -4,23 +4,17 @@ import { Text, View } from "react-native";
 import styles from "./styles/styles.js";
 import Select from "./components/operations/Select.jsx";
 import Union from "./components/operations/Union.jsx";
+import Proyeccion from "./components/operations/Proyeccion.jsx";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <SQLiteProvider
-        databaseName="estudiantes.db"
-        assetSource={{ assetId: require("./database/estudiantes.db") }}
+        <SQLiteProvider
+            databaseName="estudiantes.db"
+            assetSource={{ assetId: require("./database/estudiantes.db") }}
         >
-        <Select tabla={"estudiantes_BD"} />
+        <Proyeccion tabla={"estudiantes_BD"} columnas={"rut, nombre"}/>
       </SQLiteProvider>
-
-      {/* <SQLiteProvider
-        databaseName="estudiantes.db"
-        assetSource={{ assetId: require("./database/estudiantes.db") }}
-      >
-        <Union tabla1={"estudiantes_BD"} tabla2={"estudiantes_POO"} />
-      </SQLiteProvider> */}
     </View>
   );
 }
