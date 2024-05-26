@@ -1,16 +1,31 @@
 import { Text, View } from "react-native";
+import { DataTable } from "react-native-paper";
+
+import styles from "../styles/styles.js";
 
 export default function Resultado({ data }) {
   return (
-    <View>
-      {data.length > 0 && <Text>{Object.keys(data[0]).join(" - ")}</Text>}
-      {data.map((value, index) => {
+    <DataTable style={styles.container}>
+  {data.length > 0 && (
+    <DataTable.Header style={styles.tableHeader}>
+      {Object.keys(data[0]).map((key, index) => {
         return (
-          <View key={index}>
-            <Text>{Object.values(value).join(" - ")}</Text>
-          </View>
+          <DataTable.Title key={index}>{key}</DataTable.Title>
         );
       })}
-    </View>
+    </DataTable.Header>
+  )}
+  {data.map((value, index) => {
+    return (
+      <DataTable.Row key={index}>
+        {Object.values(value).map((val, i) => {
+          return (
+            <DataTable.Cell key={i}>{val}</DataTable.Cell>
+          );
+        })}
+      </DataTable.Row>
+    );
+  })}
+</DataTable>
   );
 }

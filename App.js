@@ -1,6 +1,7 @@
 import { SQLiteProvider } from "expo-sqlite";
+import { Text, View } from "react-native";
 
-import { StyleSheet, Text, View } from "react-native";
+import styles from "./styles/styles.js";
 import Select from "./components/operations/Select.jsx";
 import Union from "./components/operations/Union.jsx";
 
@@ -14,21 +15,12 @@ export default function App() {
         <Select tabla={"estudiantes_BD"} />
       </SQLiteProvider>
 
-      <SQLiteProvider
+      {/* <SQLiteProvider
         databaseName="estudiantes.db"
         assetSource={{ assetId: require("./database/estudiantes.db") }}
       >
         <Union tabla1={"estudiantes_BD"} tabla2={"estudiantes_POO"} />
-      </SQLiteProvider>
+      </SQLiteProvider> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
