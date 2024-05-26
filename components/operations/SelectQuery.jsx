@@ -4,13 +4,13 @@ import { Text, View } from "react-native";
 
 export default function SelectQuery({ tableName }) {
   const db = useSQLiteContext();
-  const [estudiantes, setEstudiantes] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function setup() {
       try {
         const result = await db.getAllAsync(`SELECT * FROM ${tableName}`);
-        setEstudiantes(result);
+        setData(result);
       } catch (error) {
         console.log(error);
       }
@@ -20,16 +20,11 @@ export default function SelectQuery({ tableName }) {
 
   return (
     <View>
-      {estudiantes.map((estudiante, index) => {
+      {data.length > 0 && <Text>{Object.keys(data[0]).join(" - ")}</Text>}
+      {data.map((element, index) => {
         return (
           <View key={index}>
-            <Text>
-              {estudiante.rut +
-                " - " +
-                estudiante.nombre +
-                " - " +
-                estudiante.ingreso}
-            </Text>
+            <Text>{Object.values(element).join(" - ")}</Text>
           </View>
         );
       })}
