@@ -1,11 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SQLiteProvider } from "expo-sqlite";
+
+import { StyleSheet, Text, View } from "react-native";
+import SelectQuery from "./components/operations/SelectQuery.jsx";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <SQLiteProvider
+        databaseName="estudiantes.db"
+        assetSource={{ assetId: require("./database/estudiantes.db") }}
+      >
+        <SelectQuery tableName={"estudiantes_BD"} />
+      </SQLiteProvider>
+
+      <SQLiteProvider
+        databaseName="estudiantes.db"
+        assetSource={{ assetId: require("./database/estudiantes.db") }}
+      >
+        <SelectQuery tableName={"estudiantes_POO"} />
+      </SQLiteProvider>
     </View>
   );
 }
@@ -13,8 +26,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
