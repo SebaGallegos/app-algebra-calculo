@@ -15,7 +15,8 @@
     "ra-to-sql": "^0.1.4",
     "react": "18.2.0",
     "react-native": "0.74.1",
-    "react-native-paper": "^5.12.3"
+    "react-native-paper": "^5.12.3",
+    "expo-file-system": "~17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
