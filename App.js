@@ -4,6 +4,7 @@ import {TextInput, View} from "react-native";
 import styles from "./styles/styles.js";
 import Select from "./components/operations/Select.jsx";
 import Union from "./components/operations/Union.jsx";
+import Proyeccion from "./components/operations/Proyeccion.jsx";
 import RAtoSQL from "./RAtoSQL";
 
 import {useState} from "react";
