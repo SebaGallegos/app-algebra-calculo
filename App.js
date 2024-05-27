@@ -1,51 +1,47 @@
 import { SQLiteProvider } from "expo-sqlite";
-import {TextInput, View} from "react-native";
+import {TextInput, View, Button} from "react-native";
 
 import styles from "./styles/styles.js";
-import Select from "./components/operations/Select.jsx";
-import Union from "./components/operations/Union.jsx";
-import Proyeccion from "./components/operations/Proyeccion.jsx";
-import RAtoSQL from "./RAtoSQL";
+import Parser from "./components/Parser.jsx";
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 export default function App() {
     const [texto, setTexto] = useState('')
+    const [operation, setOperation] = useState('')
+    const [query, setQuery] = useState('')
 
     const handleSubmit = () => {
-        if (texto.trim() === ''){
+        if (texto.trim() === '' || texto === operation){
             return;
         }
-        console.log(texto);
-        setTexto('')
+        console.log(`Orden en Algebra: ${texto}`);
+        setOperation(texto);
+        setQuery(texto);
     }
 
-  return (
-    <View style={styles.container}>
-      <SQLiteProvider
-        databaseName="datos.db"
-        assetSource={{ assetId: require("./database/datos.db") }}
-        >
-        <Select tabla={"tabla1"} />
-      </SQLiteProvider>
+    useEffect(() => {
+        if (operation !== query) {
+            setQuery(operation);
+        }
+    }, [operation]);
 
-        <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={texto => setTexto(texto)}
-            value={texto}
-            onSubmitEditing={() => {
-             RAtoSQL(texto);
-             handleSubmit()
-            }}
-            blurOnSubmit={false}
-        />
+    return (
+        <View style={styles.container}>
+            <SQLiteProvider
+                databaseName="datos.db"
+                assetSource={{ assetId: require("./database/datos.db") }}
+            >
+                {query && <Parser operation={query} />}
+            </SQLiteProvider>
 
-      {/* <SQLiteProvider
-        databaseName="estudiantes.db"
-        assetSource={{ assetId: require("./database/estudiantes.db") }}
-      >
-        <Union tabla1={"estudiantes_BD"} tabla2={"estudiantes_POO"} />
-      </SQLiteProvider> */}
-    </View>
-  );
+            <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                onChangeText={texto => setTexto(texto)}
+                value={texto}
+                blurOnSubmit={false}
+            />
+            <Button title={'Enviar'} onPress={handleSubmit} />
+        </View>
+    );
 }
