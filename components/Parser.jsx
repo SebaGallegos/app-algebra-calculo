@@ -1,55 +1,56 @@
 import Consulta from "./Consulta";
 
-function parseOperation(operation) {
-    // Ajuste del regex para capturar correctamente las subconsultas
-    const match = operation.match(/^(\w+)(?:\[(.*?)\])?\((.*)\)$/);
+function parseOperation(sentencia) {
+  // Expresion regular que valida la estructura de la sentencia de la siguiente forma
+  // operacion[condicion](tabla) - operacion[condicion](subconsulta)
+  const match = sentencia.match(/^(\w+)(?:\[(.*?)\])?\((.*)\)$/);
 
-    if (!match) {
-        console.log('No match:', operation);
-        return null;
-    }
+  if (!match) {
+    console.log("La orden no coincide:", sentencia);
+    return null;
+  }
 
-    const [_, op, args, table] = match;
-    console.log(`Operation: ${op}, Args: ${args}, Table: ${table}`);
+  const [_, operacion, args, tabla] = match;
+  console.log(`Sentencia: ${operacion}, Args: ${args}, Tabla: ${tabla}`);
 
-    let sql;
-    switch (op.toLowerCase()) {
-        case 'sel':
-            if (args) {
-                let cond = args.replace(/\\"/g, '"').split(',').join(' AND ');
-                sql = `SELECT * FROM ${table} WHERE ${cond}`;
-            } else {
-                sql = `SELECT * FROM ${table}`;
-            }
-            break;
-        case 'proy':
-            if (args) {
-                let columns = args.replace(/\\"/g, '"').split(',').join(', ');
-                // Procesar recursivamente la subconsulta si existe
-                const subMatch = table.match(/^(\w+)(?:\[(.*?)\])?\((.*)\)$/);
-                if (subMatch) {
-                    let subOp = parseOperation(table);
-                    if (subOp) {
-                        sql = `SELECT ${columns} FROM (${subOp}) AS subquery`;
-                    } else {
-                        console.log('Invalid sub-operation:', table);
-                        return null;
-                    }
-                } else {
-                    sql = `SELECT ${columns} FROM ${table}`;
-                }
-            }
-            break;
-        default:
-            console.log('Operation not supported:', op);
+  let sql;
+  switch (operacion.toLowerCase()) {
+    case "sel":
+      if (args) {
+        let condicion = args.replace(/\\"/g, '"').split(",").join(" AND ");
+        sql = `SELECT * FROM ${tabla} WHERE ${condicion}`;
+      } else {
+        sql = `SELECT * FROM ${tabla}`;
+      }
+      break;
+    case "proy":
+      if (args) {
+        let columnas = args.replace(/\\"/g, '"').split(",").join(", ");
+        // Procesar recursivamente la subconsulta si existe
+        const subMatch = tabla.match(/^(\w+)(?:\[(.*?)\])?\((.*)\)$/);
+        if (subMatch) {
+          let subOp = parseOperation(tabla);
+          if (subOp) {
+            sql = `SELECT ${columnas} FROM (${subOp}) AS subquery`;
+          } else {
+            console.log("Sub-operación inválida:", tabla);
             return null;
-    }
+          }
+        } else {
+          sql = `SELECT ${columnas} FROM ${tabla}`;
+        }
+      }
+      break;
+    default:
+      console.log("Operación no soportada:", operacion);
+      return null;
+  }
 
-    console.log('Generated SQL:', sql);
-    return sql;
+  console.log("SQL generado:", sql);
+  return sql;
 }
 
-export default function Parser({ operation }) {
-    const SQL = parseOperation(operation);
-    return SQL ? <Consulta SQL={SQL} /> : null;
+export default function Parser({ sentencia }) {
+  const SQL = parseOperation(sentencia);
+  return SQL ? <Consulta SQL={SQL} /> : null;
 }
