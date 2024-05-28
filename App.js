@@ -35,13 +35,34 @@ export default function App() {
                 {query && <Parser operation={query} />}
             </SQLiteProvider>
 
-            <TextInput
-                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                onChangeText={texto => setTexto(texto)}
-                value={texto}
-                blurOnSubmit={false}
-            />
-            <Button title={'Enviar'} onPress={handleSubmit} />
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <TextInput
+                    style={{
+                        height: 40,
+                        borderColor: 'gray',
+                        borderWidth: 1,
+                        flexGrow: 1,
+                        maxWidth: '80%',
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        fontSize: 15
+                }}
+                    onChangeText={texto => setTexto(texto)}
+                    value={texto}
+                    blurOnSubmit={false}
+                    multiline={false}
+                />
+                <View style={{
+                    height: 40,
+                    justifyContent: 'center',
+                }}>
+                    <Button title={'Enviar'} onPress={handleSubmit} />
+                </View>
+            </View>
         </View>
     );
 }
