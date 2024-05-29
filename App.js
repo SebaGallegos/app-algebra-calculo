@@ -29,8 +29,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <SQLiteProvider
-        databaseName="datos.db"
-        assetSource={{ assetId: require("./database/datos.db") }}
+        databaseName="estudiantes.db"
+        assetSource={{ assetId: require("./database/estudiantes.db") }}
       >
         {consulta && <Parser sentencia={consulta} />}
       </SQLiteProvider>
