@@ -1,5 +1,6 @@
 import { SQLiteProvider } from "expo-sqlite";
-import { TextInput, View, Button } from "react-native";
+import { TextInput, View } from "react-native";
+import { Button } from "react-native-paper";
 
 import styles from "./styles/estilos.js";
 import Parser from "./components/Parser.jsx";
@@ -26,6 +27,10 @@ export default function App() {
     }
   }, [expresion]);
 
+  const handleButtonPress = (char) => {
+    setTexto((prev) => prev + char);
+  };
+
   return (
     <View style={styles.container}>
       <SQLiteProvider
@@ -35,6 +40,42 @@ export default function App() {
         {consulta && <Parser sentencia={consulta} />}
       </SQLiteProvider>
 
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginBottom: 10,
+        }}
+      >
+        <Button
+          onPress={() => {
+            handleButtonPress("\u03C3");
+          }}
+        >
+          {"\u03C3"}
+        </Button>
+        <Button
+          onPress={() => {
+            handleButtonPress("\u03C0");
+          }}
+        >
+          {"\u03C0"}
+        </Button>
+        <Button
+          onPress={() => {
+            handleButtonPress("\u222A");
+          }}
+        >
+          {"\u222A"}
+        </Button>
+        <Button
+          onPress={() => {
+            handleButtonPress("\u2229");
+          }}
+        >
+          {"\u2229"}
+        </Button>
+      </View>
       <View
         style={{
           flexDirection: "row",
@@ -64,7 +105,7 @@ export default function App() {
             justifyContent: "center",
           }}
         >
-          <Button title={"Enviar"} onPress={handleSubmit} />
+          <Button onPress={handleSubmit}>Enviar</Button>
         </View>
       </View>
     </View>
