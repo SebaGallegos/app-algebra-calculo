@@ -48,6 +48,8 @@ export default function App() {
         }}
       >
         <Button
+          style={styles.Button}
+          mode={"contained"}
           onPress={() => {
             handleButtonPress("\u03C3");
           }}
@@ -55,6 +57,8 @@ export default function App() {
           {"\u03C3"}
         </Button>
         <Button
+          style={styles.Button}
+          mode={"contained"}
           onPress={() => {
             handleButtonPress("\u03C0");
           }}
@@ -62,6 +66,8 @@ export default function App() {
           {"\u03C0"}
         </Button>
         <Button
+          style={styles.Button}
+          mode={"contained"}
           onPress={() => {
             handleButtonPress("\u222A");
           }}
@@ -69,6 +75,8 @@ export default function App() {
           {"\u222A"}
         </Button>
         <Button
+          style={styles.Button}
+          mode={"contained"}
           onPress={() => {
             handleButtonPress("\u2229");
           }}
@@ -84,16 +92,7 @@ export default function App() {
         }}
       >
         <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            flexGrow: 1,
-            maxWidth: "80%",
-            paddingLeft: 10,
-            paddingRight: 10,
-            fontSize: 15,
-          }}
+          style={styles.textInput}
           onChangeText={(texto) => setTexto(texto)}
           value={texto}
           blurOnSubmit={false}
@@ -105,7 +104,13 @@ export default function App() {
             justifyContent: "center",
           }}
         >
-          <Button onPress={handleSubmit}>Enviar</Button>
+          <Button
+            onPress={handleSubmit}
+            mode={"contained"}
+            style={styles.Button}
+          >
+            Enviar
+          </Button>
         </View>
       </View>
     </View>

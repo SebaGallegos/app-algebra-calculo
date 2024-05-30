@@ -9,4 +9,20 @@ export default styles = StyleSheet.create({
   tableHeader: {
     backgroundColor: "#DCDCDC",
   },
+  textInput: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    flexGrow: 1,
+    width: "auto",
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 10,
+    fontSize: 15,
+  },
+  Button: {
+    borderRadius: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
 });
