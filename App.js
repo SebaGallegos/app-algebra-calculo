@@ -1,11 +1,11 @@
+import { useState, useEffect } from "react";
+import { View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
 import { SQLiteProvider } from "expo-sqlite";
-import { TextInput, View } from "react-native";
-import { Button } from "react-native-paper";
 
 import styles from "./styles/estilos.js";
+import { colores } from "./styles/colores.js";
 import Parser from "./components/Parser.jsx";
-
-import { useState, useEffect } from "react";
 
 export default function App() {
   const [texto, setTexto] = useState("");
@@ -49,9 +49,10 @@ export default function App() {
       >
         <Button
           style={styles.Button}
+          buttonColor={colores.colors.primary}
           mode={"contained"}
           onPress={() => {
-            handleButtonPress("\u03C3");
+            handleButtonPress("\u03C3"); // Selección
           }}
         >
           {"\u03C3"}
@@ -59,26 +60,29 @@ export default function App() {
         <Button
           style={styles.Button}
           mode={"contained"}
+          buttonColor={colores.colors.primary}
           onPress={() => {
-            handleButtonPress("\u03C0");
+            handleButtonPress("\u03C0"); // Proyección
           }}
         >
           {"\u03C0"}
         </Button>
         <Button
           style={styles.Button}
+          buttonColor={colores.colors.primary}
           mode={"contained"}
           onPress={() => {
-            handleButtonPress("\u222A");
+            handleButtonPress("\u222A"); // Union
           }}
         >
           {"\u222A"}
         </Button>
         <Button
           style={styles.Button}
+          buttonColor={colores.colors.primary}
           mode={"contained"}
           onPress={() => {
-            handleButtonPress("\u2229");
+            handleButtonPress("\u2229"); // Intersección
           }}
         >
           {"\u2229"}
@@ -93,10 +97,12 @@ export default function App() {
       >
         <TextInput
           style={styles.textInput}
+          placeholder={"Ingrese orden..."}
           onChangeText={(texto) => setTexto(texto)}
           value={texto}
           blurOnSubmit={false}
           multiline={false}
+          activeUnderlineColor={colores.colors.primary}
         />
         <View
           style={{
@@ -108,6 +114,7 @@ export default function App() {
             onPress={handleSubmit}
             mode={"contained"}
             style={styles.Button}
+            buttonColor={colores.colors.primary}
           >
             Enviar
           </Button>
