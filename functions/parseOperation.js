@@ -33,6 +33,20 @@ export function parseOperation(sentencia) {
     }
   }
 
+  // Si la sentencia contiene ' - ', se trata de una operación de diferencia
+  if (sentencia.includes(" - ")) {
+    // Se divide en dos partes y se procesan recursivamente
+    const partes = sentencia.split(" - ");
+    const sql1 = parseOperation(partes[0]);
+    const sql2 = parseOperation(partes[1]);
+    if (sql1 && sql2) {
+      return `${sql1} EXCEPT ${sql2}`;
+    } else {
+      console.log("Operación de diferencia inválida:", sentencia);
+      return null;
+    }
+  }
+
   // Si la sentencia es solo una tabla, se retorna un SELECT * FROM tabla
   if (/^\w+$/.test(sentencia)) {
     return `SELECT * FROM ${sentencia}`;
