@@ -11,7 +11,7 @@ export default function App() {
   const [texto, setTexto] = useState("");
   const [expresion, setExpresion] = useState("");
   const [consulta, setConsulta] = useState("");
-  const [cursorPosition, setCursorPosition] = useState({ start: 0, end: 0 });
+  const [posicionCursor, setPosicionCursor] = useState({ inicio: 0, final: 0 });
 
   const handleSubmit = () => {
     if (texto.trim() === "" || texto === expresion) {
@@ -29,16 +29,16 @@ export default function App() {
   }, [expresion]);
 
   const handleButtonPress = (char) => {
-    const newText = [
-      texto.slice(0, cursorPosition.start),
+    const nuevoTexto = [
+      texto.slice(0, posicionCursor.inicio),
       char,
-      texto.slice(cursorPosition.end),
+      texto.slice(posicionCursor.final),
     ].join("");
-    setTexto(newText);
+    setTexto(nuevoTexto);
 
-    setCursorPosition({
-      start: cursorPosition.start + 1,
-      end: cursorPosition.start + 1,
+    setPosicionCursor({
+      inicio: posicionCursor.inicio + 1,
+      final: posicionCursor.inicio + 1,
     });
   };
 
@@ -121,9 +121,9 @@ export default function App() {
           placeholder={"Ingrese orden..."}
           onChangeText={(texto) => setTexto(texto)}
           onSelectionChange={(e) => {
-            setCursorPosition(e.nativeEvent.selection);
+            setPosicionCursor(e.nativeEvent.selection);
           }}
-          selection={cursorPosition}
+          selection={posicionCursor}
           value={texto}
           blurOnSubmit={false}
           multiline={false}
