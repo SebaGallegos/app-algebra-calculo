@@ -1,5 +1,5 @@
 export function parseOperation(sentencia) {
-  // Si la sentencia contiene ' U ', se trata de una operación de unión
+  // Operación Union
   if (sentencia.includes(" U ") || sentencia.includes("\u222A")) {
     // Se divide en dos partes y se procesan recursivamente
     if (sentencia.includes(" U ")) {
@@ -16,7 +16,7 @@ export function parseOperation(sentencia) {
     }
   }
 
-  // Check if the sentence contains ' ∩ ' (which represents intersection in your case)
+  // Operación intersección
   if (sentencia.includes(" ∩ ") || sentencia.includes(" \u2229 ")) {
     // Se divide en dos partes y se procesan recursivamente
     if (sentencia.includes(" ∩ ")) {
@@ -33,7 +33,7 @@ export function parseOperation(sentencia) {
     }
   }
 
-  // Si la sentencia contiene ' - ', se trata de una operación de diferencia
+  // Operación diferencia
   if (sentencia.includes(" - ")) {
     // Se divide en dos partes y se procesan recursivamente
     const partes = sentencia.split(" - ");

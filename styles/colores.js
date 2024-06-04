@@ -40,5 +40,6 @@ export const colores = {
     surfaceDisabled: "rgba(26, 28, 30, 0.12)",
     onSurfaceDisabled: "rgba(26, 28, 30, 0.38)",
     backdrop: "rgba(45, 49, 56, 0.4)",
+    text: "rgb(253, 252, 255)",
   },
 };

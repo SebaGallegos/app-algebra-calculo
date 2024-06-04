@@ -1,17 +1,28 @@
 import { DataTable } from "react-native-paper";
 
 import styles from "../styles/estilos.js";
+import { colores } from "../styles/colores";
 import { Text } from "react-native";
 
 export default function Resultado({ sql, data }) {
   return (
     <>
       <DataTable style={styles.container}>
-        {/* Nombre de las columnas o Header */}
+        {/* Header */}
         {data.length > 0 && (
           <DataTable.Header style={styles.tableHeader}>
             {Object.keys(data[0]).map((key, index) => {
-              return <DataTable.Title key={index}>{key}</DataTable.Title>;
+              return (
+                <DataTable.Title key={index}>
+                  <Text
+                    style={{
+                      color: colores.colors.text,
+                    }}
+                  >
+                    {key}
+                  </Text>
+                </DataTable.Title>
+              );
             })}
           </DataTable.Header>
         )}

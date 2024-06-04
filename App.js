@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { SQLiteProvider } from "expo-sqlite";
 
@@ -29,7 +29,7 @@ export default function App() {
   }, [expresion]);
 
   const handleButtonPress = (char) => {
-    const nuevoTexto = [
+    /*const nuevoTexto = [
       texto.slice(0, posicionCursor.inicio),
       char,
       texto.slice(posicionCursor.final),
@@ -39,6 +39,14 @@ export default function App() {
     setPosicionCursor({
       inicio: posicionCursor.inicio + 1,
       final: posicionCursor.inicio + 1,
+    });*/
+
+    const nuevoTexto = texto + char;
+    setTexto(nuevoTexto);
+
+    setPosicionCursor({
+      inicio: nuevoTexto.length,
+      final: nuevoTexto.length,
     });
   };
 
@@ -48,7 +56,21 @@ export default function App() {
         databaseName="estudiantes.db"
         assetSource={{ assetId: require("./database/estudiantes.db") }}
       >
-        {consulta && <Parser sentencia={consulta} />}
+        {consulta ? (
+          <Parser sentencia={consulta} />
+        ) : (
+          <View style={styles.container}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              Ingrese una consulta
+            </Text>
+          </View>
+        )}
       </SQLiteProvider>
 
       <View

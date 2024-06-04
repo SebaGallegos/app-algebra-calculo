@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
     backgroundColor: colores.colors.background,
   },
   tableHeader: {
-    backgroundColor: "#DCDCDC",
+    backgroundColor: colores.colors.primary,
   },
   textInput: {
     height: 40,
