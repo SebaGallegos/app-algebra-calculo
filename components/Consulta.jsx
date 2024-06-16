@@ -13,6 +13,7 @@ export default function Consulta({ SQL }) {
         setData(result);
       } catch (error) {
         console.log(error);
+        setData(null);
       }
     }
     setup();

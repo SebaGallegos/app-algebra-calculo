@@ -2,9 +2,24 @@ import { DataTable } from "react-native-paper";
 
 import styles from "../styles/estilos.js";
 import { colores } from "../styles/colores";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
 export default function Resultado({ sql, data }) {
+  // Si data retorna null, se muestra un mensaje de error
+  // Puede darse el caso de que la consulta no haya retornado datos
+  // o que haya un error de ejecución SQL
+  if (!data) {
+    return (
+      <>
+        <View>
+          <Text>No se obtuvieron los datos</Text>
+        </View>
+      </>
+    );
+  }
+
+  console.log(data);
+
   return (
     <>
       <DataTable style={styles.container}>

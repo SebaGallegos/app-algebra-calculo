@@ -1,3 +1,8 @@
+/*
+ * parseOperation: Función que recibe una sentencia en notación de álgebra relacional
+ * y retorna una sentencia SQL equivalente.
+ */
+
 export function parseOperation(sentencia) {
   // Operación Union
   if (sentencia.includes(" U ") || sentencia.includes("\u222A")) {
