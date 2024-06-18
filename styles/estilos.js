@@ -5,7 +5,8 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 15,
-    justifyContent: "center",
+    marginTop: 30,
+    //justifyContent: "center",
     backgroundColor: colores.colors.background,
   },
   tableHeader: {
