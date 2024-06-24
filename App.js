@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import { SQLiteProvider } from "expo-sqlite";
 
 import styles from "./styles/estilos.js";
 import { colores } from "./styles/colores.js";
 import Parser from "./components/Parser.jsx";
+import GetColumnas from "./components/GetColumnas";
 
 export default function App() {
   const [texto, setTexto] = useState("");
   const [expresion, setExpresion] = useState("");
   const [consulta, setConsulta] = useState("");
   const [posicionCursor, setPosicionCursor] = useState({ inicio: 0, final: 0 });
+
+  const handleClearScreen = () => {
+    setConsulta("");
+  };
 
   const handleSubmit = () => {
     if (texto.trim() === "" || texto === expresion) {
@@ -29,18 +34,6 @@ export default function App() {
   }, [expresion]);
 
   const handleButtonPress = (char) => {
-    /*const nuevoTexto = [
-      texto.slice(0, posicionCursor.inicio),
-      char,
-      texto.slice(posicionCursor.final),
-    ].join("");
-    setTexto(nuevoTexto);
-
-    setPosicionCursor({
-      inicio: posicionCursor.inicio + 1,
-      final: posicionCursor.inicio + 1,
-    });*/
-
     const nuevoTexto = texto + char;
     setTexto(nuevoTexto);
 
@@ -59,19 +52,29 @@ export default function App() {
         {consulta ? (
           <Parser sentencia={consulta} />
         ) : (
-          <View style={styles.container}>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Ingrese una consulta
-            </Text>
-          </View>
+          <ScrollView
+            style={styles.container}
+            contentContainerStyle={{ justifyContent: "center" }}
+          >
+            <GetColumnas />
+          </ScrollView>
         )}
       </SQLiteProvider>
+
+      <View
+        style={{
+          marginBottom: 10,
+        }}
+      >
+        <Button
+          style={styles.Button}
+          buttonColor={colores.colors.primary}
+          mode={"contained"}
+          onPress={handleClearScreen}
+        >
+          Limpiar pantalla
+        </Button>
+      </View>
 
       <View
         style={{

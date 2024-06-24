@@ -2,7 +2,7 @@ import { DataTable } from "react-native-paper";
 
 import styles from "../styles/estilos.js";
 import { colores } from "../styles/colores";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 export default function Resultado({ sql, data }) {
   // Si data retorna null, se muestra un mensaje de error
@@ -11,9 +11,12 @@ export default function Resultado({ sql, data }) {
   if (!data) {
     return (
       <>
-        <View>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={{ justifyContent: "center" }}
+        >
           <Text>No se obtuvieron los datos</Text>
-        </View>
+        </ScrollView>
       </>
     );
   }
