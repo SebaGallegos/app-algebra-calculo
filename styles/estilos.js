@@ -9,6 +9,13 @@ export default styles = StyleSheet.create({
     //justifyContent: "center",
     backgroundColor: colores.colors.background,
   },
+  container2: {
+    flex: 1,
+    padding: 15,
+    //marginTop: 30,
+    //justifyContent: "center",
+    backgroundColor: colores.colors.background,
+  },
   tableHeader: {
     backgroundColor: colores.colors.primary,
   },

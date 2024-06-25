@@ -7,11 +7,6 @@ export default function GetColumnas() {
   const [tablas, setTablas] = useState([]);
   const [columnas, setColumnas] = useState({});
 
-  const traducciones = {
-    name: "nombre",
-    // Agrega aquí las demás traducciones
-  };
-
   useEffect(() => {
     async function getTablas() {
       try {
@@ -56,7 +51,7 @@ export default function GetColumnas() {
           {columnasTabla.map((columna, index) => (
             <DataTable.Row key={index}>
               <DataTable.Cell>
-                <Text>{traducciones[columna.name] || columna.name}</Text>
+                <Text>{columna.name}</Text>
               </DataTable.Cell>
             </DataTable.Row>
           ))}

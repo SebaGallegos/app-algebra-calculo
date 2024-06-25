@@ -12,7 +12,7 @@ export default function Resultado({ sql, data }) {
     return (
       <>
         <ScrollView
-          style={styles.container}
+          style={styles.container2}
           contentContainerStyle={{ justifyContent: "center" }}
         >
           <Text>No se obtuvieron los datos</Text>
