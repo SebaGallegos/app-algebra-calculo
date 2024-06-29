@@ -75,33 +75,11 @@ export function parseOperation(sentencia) {
   switch (operacion.toLowerCase()) {
     case "sel":
     case "\u03C3":
-      if (args) {
-        let condicion = args.replace(/\\"/g, '"').split(",").join(" AND ");
-        sql = `SELECT * FROM ${tabla} WHERE ${condicion}`;
-      } else {
-        sql = `SELECT * FROM ${tabla}`;
-      }
+      sql = operacionSeleccion(args, tabla);
       break;
     case "proy":
     case "\u03C0":
-      if (args) {
-        let columnas = args.replace(/\\"/g, '"').split(",").join(", ");
-        // Procesar recursivamente la subconsulta si existe
-        const subMatch = tabla.match(
-          /^([^\s\[\]\(\)]+)(?:\[(.*?)\])?\((.*)\)$/,
-        );
-        if (subMatch) {
-          let subOp = parseOperation(tabla);
-          if (subOp) {
-            sql = `SELECT ${columnas} FROM (${subOp}) AS subquery`;
-          } else {
-            console.log("Sub-operación inválida:", tabla);
-            return null;
-          }
-        } else {
-          sql = `SELECT ${columnas} FROM ${tabla}`;
-        }
-      }
+      sql = operacionProyeccion(args, tabla);
       break;
     default:
       console.log("Operación no soportada:", operacion);
@@ -109,5 +87,37 @@ export function parseOperation(sentencia) {
   }
 
   console.log("SQL generado:", sql);
+  return sql;
+}
+
+function operacionSeleccion(args, tabla) {
+  if (args) {
+    let condicion = args.replace(/\\"/g, '"').split(",").join(" AND ");
+    var sql = `SELECT * FROM ${tabla} WHERE ${condicion}`;
+  } else {
+    var sql = `SELECT * FROM ${tabla}`;
+  }
+
+  return sql;
+}
+
+function operacionProyeccion(args, tabla) {
+  if (args) {
+    let columnas = args.replace(/\\"/g, '"').split(",").join(", ");
+    // Procesar recursivamente la subconsulta si existe
+    const subMatch = tabla.match(/^([^\s\[\]\(\)]+)(?:\[(.*?)\])?\((.*)\)$/);
+    if (subMatch) {
+      let subOp = parseOperation(tabla);
+      if (subOp) {
+        var sql = `SELECT ${columnas} FROM (${subOp}) AS subquery`;
+      } else {
+        console.log("Sub-operación inválida:", tabla);
+        return null;
+      }
+    } else {
+      var sql = `SELECT ${columnas} FROM ${tabla}`;
+    }
+  }
+
   return sql;
 }
