@@ -1,4 +1,4 @@
-import Consulta from "./Consulta";
+import Consulta from "./ConsultaSQL";
 
 
 export default function ParserSQL({ sentencia }) {
