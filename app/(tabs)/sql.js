@@ -36,7 +36,7 @@ export default function Tab() {
           </ScrollView>
         )}
         <TextInput
-          style={[styles.textInput, { width: '100%' }]}
+          style={[styles.textInputSQL, { width: '100%' }]}
           placeholder={"Ingrese orden SQL..."}
           onChangeText={(texto) => setTexto(texto)}
           onSelectionChange={(e) => {
@@ -46,6 +46,7 @@ export default function Tab() {
           value={texto}
           blurOnSubmit={false}
           multiline={true}
+          numberOfLines={10}
           activeUnderlineColor={colores.colors.primary}
         />
         <View style={styles.container}>

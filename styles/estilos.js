@@ -19,6 +19,14 @@ export default styles = StyleSheet.create({
   tableHeader: {
     backgroundColor: colores.colors.primary,
   },
+  textInputSQL: {
+    borderColor: "gray",
+    borderWidth: 1,
+    fontSize: 15,
+    padding: 10,
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
   textInput: {
     height: 40,
     borderColor: "gray",
