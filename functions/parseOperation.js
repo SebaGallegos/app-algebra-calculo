@@ -1,7 +1,12 @@
-/*
- * parseOperation: Función que recibe una sentencia en notación de álgebra relacional
- * y retorna una sentencia SQL equivalente.
- */
+const OPERATIONS = {
+  UNION: [' U ', '\u222A'],
+  INTERSECTION: [' ∩ ', ' \u2229 '],
+  DIFFERENCE: [' - '],
+  SELECTION: ['sel', '\u03C3'],
+  PROJECTION: ['proy', '\u03C0'],
+  JOIN: ['join'],
+  THETA_JOIN: ['⨝']
+};
 
 export function parseOperation(sentencia) {
   // Operación Union
@@ -52,6 +57,11 @@ export function parseOperation(sentencia) {
     }
   }
 
+  // Operación Theta Join
+  if (sentencia.includes("⨝")) {
+    return handleThetaJoin(sentencia);
+  }
+
   // Si la sentencia es solo una tabla, se retorna un SELECT * FROM tabla
   if (/^\w+$/.test(sentencia)) {
     return `SELECT * FROM ${sentencia}`;
@@ -89,6 +99,44 @@ export function parseOperation(sentencia) {
   console.log("SQL generado:", sql);
   return sql;
 }
+
+function handleThetaJoin(sentence) {
+  // Dividir la sentencia en las dos tablas y la condición
+  const parts = sentence.split('⨝');
+  if (parts.length !== 2) {
+    console.log("La orden de theta-join no tiene el formato correcto:", sentence);
+    return null;
+  }
+
+  const [leftTable, rightPart] = parts;
+
+  // Extraer la condición y la tabla derecha
+  const match = rightPart.match(/^\s*([\w]+)\.([\w]+)\s*=\s*([\w]+)\.([\w]+)\s*([\w\s]+)?$/);
+  if (!match) {
+    console.log("No se pudo extraer la condición y la tabla derecha:", rightPart);
+    return null;
+  }
+
+  const [, leftTableAlias, leftColumn, rightTableAlias, rightColumn, afterCondition] = match;
+
+  // Construimos la consulta SQL
+  const sql = `
+    SELECT *
+    FROM "${leftTable.trim()}" AS ${leftTableAlias.trim()}
+    CROSS JOIN "${rightTableAlias.trim()}" AS ${rightTableAlias.trim()}
+    WHERE ${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}
+  `;
+
+  console.log("SQL generado para Theta Join:", sql);
+  console.log("Tabla izquierda:", leftTable.trim());
+  console.log("Tabla derecha:", rightTableAlias.trim());
+  console.log("Condición:", `${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}`);
+
+  return sql.replace(/\n\s*/g, ' ').trim();
+}
+
+
+
 
 function operacionSeleccion(args, tabla) {
   if (args) {

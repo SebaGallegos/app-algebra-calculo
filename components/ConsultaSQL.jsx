@@ -1,6 +1,6 @@
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
-import Resultado from "./Resultado";
+import Resultado from "./ResultadoSQL";
 
 export default function ConsultaSQL({ SQL }) {
   const db = useSQLiteContext();
@@ -11,7 +11,7 @@ export default function ConsultaSQL({ SQL }) {
       try {
         // Dividir las sentencias SQL
         const sentencias = SQL.split(';').filter(s => s.trim() !== '');
-        
+
         for (let sentencia of sentencias) {
           if (sentencia.trim().toLowerCase().startsWith('select')) {
             // Para consultas SELECT, usamos getAllAsync
@@ -22,7 +22,7 @@ export default function ConsultaSQL({ SQL }) {
             await db.execAsync(sentencia);
           }
         }
-        
+
         // Si no hay resultados de SELECT, ejecutamos un SELECT * de la tabla creada
         if (data.length === 0) {
           const tableName = SQL.match(/CREATE TABLE IF NOT EXISTS (\w+)/i)?.[1];
@@ -33,7 +33,7 @@ export default function ConsultaSQL({ SQL }) {
         }
       } catch (error) {
         console.log(error);
-        setData(null);
+        setData(error);
       }
     }
     setup();

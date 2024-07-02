@@ -13,10 +13,12 @@ export default function Tab() {
   const [expresion, setExpresion] = useState("");
   const [consulta, setConsulta] = useState("");
   const [posicionCursor, setPosicionCursor] = useState({ inicio: 0, final: 0 });
+    const [updateKey, setUpdateKey] = useState(0);
 
-  const handleClearScreen = () => {
-    setConsulta("");
-  };
+    const handleClearScreen = () => {
+        setConsulta("");
+        setUpdateKey(prevKey => prevKey + 1); // Incrementa el valor de updateKey
+    };
 
   const handleSubmit = () => {
     if (texto.trim() === "" || texto === expresion) {
@@ -46,8 +48,8 @@ export default function Tab() {
   return (
     <View style={styles.container2}>
       <SQLiteProvider
-        databaseName="estudiantes.db"
-        assetSource={{ assetId: require("../../database/estudiantes.db") }}
+        databaseName="database.db"
+        assetSource={{ assetId: require("../../database/database.db") }}
       >
         {consulta ? (
           <Parser sentencia={consulta} />
@@ -56,7 +58,7 @@ export default function Tab() {
             style={styles.container}
             contentContainerStyle={{ justifyContent: "center" }}
           >
-            <GetColumnas />
+              <GetColumnas updateKey={updateKey} />
           </ScrollView>
         )}
       </SQLiteProvider>
@@ -72,68 +74,84 @@ export default function Tab() {
           mode={"contained"}
           onPress={handleClearScreen}
         >
-          Limpiar pantalla
+          Ver Tablas
         </Button>
       </View>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginBottom: 10,
-        }}
-      >
-        <Button
-          style={styles.Button}
-          buttonColor={colores.colors.primary}
-          mode={"contained"}
-          onPress={() => {
-            handleButtonPress("\u03C3"); // Selección
-          }}
+        <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                marginBottom: 10
+            }}
+            style={{
+                flexGrow: 0
+            }}
         >
-          {"\u03C3"}
-        </Button>
-        <Button
-          style={styles.Button}
-          mode={"contained"}
-          buttonColor={colores.colors.primary}
-          onPress={() => {
-            handleButtonPress("\u03C0"); // Proyección
-          }}
-        >
-          {"\u03C0"}
-        </Button>
-        <Button
-          style={styles.Button}
-          buttonColor={colores.colors.primary}
-          mode={"contained"}
-          onPress={() => {
-            handleButtonPress("\u222A"); // Union
-          }}
-        >
-          {"\u222A"}
-        </Button>
-        <Button
-          style={styles.Button}
-          buttonColor={colores.colors.primary}
-          mode={"contained"}
-          onPress={() => {
-            handleButtonPress("\u2229"); // Intersección
-          }}
-        >
-          {"\u2229"}
-        </Button>
-        <Button
-          style={styles.Button}
-          buttonColor={colores.colors.primary}
-          mode={"contained"}
-          onPress={() => {
-            handleButtonPress("-"); // Diferencia
-          }}
-        >
-          {"-"}
-        </Button>
-      </View>
+          <Button
+              style={styles.Button}
+              buttonColor={colores.colors.primary}
+              mode={"contained"}
+              onPress={() => {
+                  handleButtonPress("\u03C3"); // Selección
+              }}
+          >
+              {"\u03C3"}
+          </Button>
+          <Button
+              style={styles.Button}
+              mode={"contained"}
+              buttonColor={colores.colors.primary}
+              onPress={() => {
+                  handleButtonPress("\u03C0"); // Proyección
+              }}
+          >
+              {"\u03C0"}
+          </Button>
+          <Button
+              style={styles.Button}
+              buttonColor={colores.colors.primary}
+              mode={"contained"}
+              onPress={() => {
+                  handleButtonPress("\u222A"); // Union
+              }}
+          >
+              {"\u222A"}
+          </Button>
+          <Button
+              style={styles.Button}
+              buttonColor={colores.colors.primary}
+              mode={"contained"}
+              onPress={() => {
+                  handleButtonPress("\u2229"); // Intersección
+              }}
+          >
+              {"\u2229"}
+          </Button>
+          <Button
+              style={styles.Button}
+              buttonColor={colores.colors.primary}
+              mode={"contained"}
+              onPress={() => {
+                  handleButtonPress("-"); // Diferencia
+              }}
+          >
+              {"-"}
+          </Button>
+            <Button
+                style={styles.Button}
+                buttonColor={colores.colors.primary}
+                mode={"contained"}
+                onPress={() => {
+                    handleButtonPress("⨝"); // join
+                }}
+            >
+                {"⨝"}
+            </Button>
+        </ScrollView>
       <View
         style={{
           flexDirection: "row",
