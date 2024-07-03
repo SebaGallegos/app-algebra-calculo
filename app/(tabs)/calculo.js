@@ -101,6 +101,18 @@ export default function Tab() {
                 >
                     {"∧"}
                 </Button>
+                <Button
+                    style={styles.Button}
+                    buttonColor={colores.colors.primary}
+                    mode={"contained"}
+                    onPress={() => {
+                        handleButtonPress("∨"); // Union
+                        // handleButtonPress("U");
+                    }}
+                >
+                    {"∨"}
+                    {/* {"U"} */}
+                </Button>
             </ScrollView>
             <View
                 style={{
