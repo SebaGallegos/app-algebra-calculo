@@ -7,12 +7,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Inicio",
+          title: "Algebra",
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="home" color={color} />
           ),
         }}
       />
+        <Tabs.Screen
+            name="calculo"
+            options={{
+                title: "Calculo",
+                tabBarIcon: ({ color }) => (
+                    <FontAwesome size={28} name="home" color={color} />
+                ),
+            }}
+        />
       <Tabs.Screen
         name="sql"
         options={{

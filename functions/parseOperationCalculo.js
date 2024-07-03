@@ -1,4 +1,4 @@
-function parseOperationCalculo(Sentencia) {
+export function parseOperationCalculo(Sentencia) {
     // Extraer el nombre de la tabla y la condición completa
     const regexTabla = /\{\s*\w\s*\|\s*([a-zA-Z0-9_]+)\(\w\)\s*(.*)\s*\}/;
     const matchesTabla = Sentencia.match(regexTabla);
@@ -28,5 +28,5 @@ function parseOperationCalculo(Sentencia) {
 }
 
 // Ejemplo de uso con múltiples condiciones
-const sentenciaMultiple = "{f | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
-console.log(parseOperationCalculo(sentenciaMultiple));
+// const sentenciaMultiple = "{f | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
+// console.log(parseOperationCalculo(sentenciaMultiple));
