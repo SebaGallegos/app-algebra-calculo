@@ -31,8 +31,8 @@ export default function Tab() {
 
   return (
       <SQLiteProvider
-          databaseName="database.db"
-          assetSource={{ assetId: require("../../database/database.db") }}
+          databaseName="estudiantes.db"
+          assetSource={{ assetId: require("../../database/estudiantes.db") }}
       >
         <View style={localStyles.container}>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

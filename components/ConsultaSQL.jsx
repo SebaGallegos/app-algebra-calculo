@@ -33,7 +33,7 @@ export default function ConsultaSQL({ SQL }) {
         }
       } catch (error) {
         console.log(error);
-        setData(error);
+        setData([{ error: error.toString() }]);
       }
     }
     setup();

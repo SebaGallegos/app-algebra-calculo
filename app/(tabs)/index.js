@@ -48,8 +48,8 @@ export default function Tab() {
   return (
     <View style={styles.container2}>
       <SQLiteProvider
-        databaseName="database.db"
-        assetSource={{ assetId: require("../../database/database.db") }}
+        databaseName="estudiantes.db"
+        assetSource={{ assetId: require("../../database/estudiantes.db") }}
       >
         {consulta ? (
           <Parser sentencia={consulta} />
