@@ -1,4 +1,17 @@
 export function parseOperationCalculo(Sentencia) {
+
+    // Verificar si la sentencia incluye una unión
+    if (Sentencia.includes('V') || Sentencia.includes('U')) {
+        // Dividir la sentencia en las dos partes de la unión
+        const unionSymbol = Sentencia.includes('U') ? 'U' : 'V';
+        const [leftSentencia, rightSentencia] = Sentencia.split(unionSymbol).map(s => s.trim());
+        const leftQuery = parseOperationCalculo(leftSentencia);
+        const rightQuery = parseOperationCalculo(rightSentencia);
+        
+        // Devolver la consulta SQL con la unión
+        return `${leftQuery} UNION ${rightQuery}`;
+    }
+
     // Extraer el nombre de la tabla y la condición completa
     const regexTabla = /\{\s*(\w(?:\.\w+)?(?:,\s*\w(?:\.\w+)?)*)\s*\|\s*([a-zA-Z0-9_]+)\(\w\)\s*(.*)\s*\}/;
     const matchesTabla = Sentencia.match(regexTabla);
@@ -37,10 +50,19 @@ export function parseOperationCalculo(Sentencia) {
 
 // Ejemplo de uso con múltiples condiciones
 const sentenciaMultiple = "{f | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
-const sentenciaMultiple2 = "{f.Nombre, f.Edad | Estudiantes_BD(f)}";
 console.log("seleccion: ",parseOperationCalculo(sentenciaMultiple)); // "SELECT * FROM Estudiantes_BD WHERE Ingreso < 2020"
+
+// Ejemplo de uso con proyección
+const sentenciaMultiple2 = "{f.rut, f.nombre | Estudiantes_BD(f)}";
 console.log("proyeccion: ",parseOperationCalculo(sentenciaMultiple2)) //  "SELECT Nombre, Edad FROM Estudiantes_BD"
 
+// Ejemplo de uso con selección y proyección
 const sentenciasp = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
 console.log("seleccion y proyeccion: ",parseOperationCalculo(sentenciasp))// "SELECT Nombre, Edad FROM Estudiantes_BD WHERE Ingreso < 2020"
- 
+
+// Ejemplo de uso con unión utilizando 'V'
+const sentenciaUnionV = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020} V {f.rut, f.nombre | Estudiantes_POO(f) ∧ f.Ingreso<2022}";
+// Ejemplo de uso con unión utilizando 'U'
+const sentenciaUnionU = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020} U {f.rut, f.nombre | Estudiantes_POO(f) ∧ f.Ingreso<2022}";
+console.log("union U: ", parseOperationCalculo(sentenciaUnionV)); // "SELECT rut, nombre FROM Estudiantes_BD WHERE Ingreso < 2020 UNION SELECT rut, nombre FROM Estudiantes_BI WHERE Ingreso < 2022"
+console.log("union V: ", parseOperationCalculo(sentenciaUnionU)); // "SELECT rut, nombre FROM Estudiantes_BD WHERE Ingreso < 2020 UNION ALL SELECT rut, nombre FROM Estudiantes_BI WHERE Ingreso < 2022"
