@@ -34,3 +34,9 @@ test("parseOperation: Union", () => {
     "SELECT * FROM tabla1 WHERE arg1=1 UNION SELECT * FROM tabla2 WHERE arg2=2",
   );
 });
+
+test("parseOperation: Join", () => {
+  expect(parseOperation("Empleados ⨝ Empleados.id_empleado = Proyectos.id_proyecto Proyectos")).toBe(
+      'SELECT * FROM "Empleados" AS Empleados CROSS JOIN "Proyectos" AS Proyectos WHERE Empleados.id_empleado = Proyectos.id_proyecto'
+  );
+});

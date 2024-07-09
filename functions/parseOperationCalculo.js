@@ -49,20 +49,20 @@ export function parseOperationCalculo(Sentencia) {
 }
 
 // Ejemplo de uso con múltiples condiciones
-const sentenciaMultiple = "{f | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
-console.log("seleccion: ",parseOperationCalculo(sentenciaMultiple)); // "SELECT * FROM Estudiantes_BD WHERE Ingreso < 2020"
+//const sentenciaMultiple = "{f | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
+//console.log("seleccion: ",parseOperationCalculo(sentenciaMultiple)); // "SELECT * FROM Estudiantes_BD WHERE Ingreso < 2020"
 
 // Ejemplo de uso con proyección
-const sentenciaMultiple2 = "{f.rut, f.nombre | Estudiantes_BD(f)}";
-console.log("proyeccion: ",parseOperationCalculo(sentenciaMultiple2)) //  "SELECT Nombre, Edad FROM Estudiantes_BD"
+//const sentenciaMultiple2 = "{f.rut, f.nombre | Estudiantes_BD(f)}";
+//console.log("proyeccion: ",parseOperationCalculo(sentenciaMultiple2)) //  "SELECT Nombre, Edad FROM Estudiantes_BD"
 
 // Ejemplo de uso con selección y proyección
-const sentenciasp = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
-console.log("seleccion y proyeccion: ",parseOperationCalculo(sentenciasp))// "SELECT Nombre, Edad FROM Estudiantes_BD WHERE Ingreso < 2020"
+//const sentenciasp = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020}";
+//console.log("seleccion y proyeccion: ",parseOperationCalculo(sentenciasp))// "SELECT Nombre, Edad FROM Estudiantes_BD WHERE Ingreso < 2020"
 
 // Ejemplo de uso con unión utilizando 'V'
-const sentenciaUnionV = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020} V {f.rut, f.nombre | Estudiantes_POO(f) ∧ f.Ingreso<2022}";
+//const sentenciaUnionV = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020} V {f.rut, f.nombre | Estudiantes_POO(f) ∧ f.Ingreso<2022}";
 // Ejemplo de uso con unión utilizando 'U'
-const sentenciaUnionU = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020} U {f.rut, f.nombre | Estudiantes_POO(f) ∧ f.Ingreso<2022}";
-console.log("union U: ", parseOperationCalculo(sentenciaUnionV)); // "SELECT rut, nombre FROM Estudiantes_BD WHERE Ingreso < 2020 UNION SELECT rut, nombre FROM Estudiantes_BI WHERE Ingreso < 2022"
-console.log("union V: ", parseOperationCalculo(sentenciaUnionU)); // "SELECT rut, nombre FROM Estudiantes_BD WHERE Ingreso < 2020 UNION ALL SELECT rut, nombre FROM Estudiantes_BI WHERE Ingreso < 2022"
+//const sentenciaUnionU = "{f.rut, f.nombre | Estudiantes_BD(f) ∧ f.Ingreso<2020} U {f.rut, f.nombre | Estudiantes_POO(f) ∧ f.Ingreso<2022}";
+//console.log("union U: ", parseOperationCalculo(sentenciaUnionV)); // "SELECT rut, nombre FROM Estudiantes_BD WHERE Ingreso < 2020 UNION SELECT rut, nombre FROM Estudiantes_BI WHERE Ingreso < 2022"
+//console.log("union V: ", parseOperationCalculo(sentenciaUnionU)); // "SELECT rut, nombre FROM Estudiantes_BD WHERE Ingreso < 2020 UNION ALL SELECT rut, nombre FROM Estudiantes_BI WHERE Ingreso < 2022"
