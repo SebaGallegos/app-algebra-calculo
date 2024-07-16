@@ -37,6 +37,6 @@ test("parseOperation: Union", () => {
 
 test("parseOperation: Join", () => {
   expect(parseOperation("Empleados ⨝ Empleados.id_empleado = Proyectos.id_proyecto Proyectos")).toBe(
-      'SELECT * FROM "Empleados" AS Empleados CROSS JOIN "Proyectos" AS Proyectos WHERE Empleados.id_empleado = Proyectos.id_proyecto'
+      'SELECT * FROM "Empleados" AS Empleados INNER JOIN "Proyectos" AS Proyectos ON Empleados.id_empleado = Proyectos.id_proyecto'
   );
 });

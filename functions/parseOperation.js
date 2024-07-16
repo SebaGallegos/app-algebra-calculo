@@ -5,7 +5,7 @@ const OPERATIONS = {
   SELECTION: ['sel', '\u03C3'],
   PROJECTION: ['proy', '\u03C0'],
   JOIN: ['join'],
-  THETA_JOIN: ['⨝']
+  INNER_JOIN: ['⨝']
 };
 
 export function parseOperation(sentencia) {
@@ -59,7 +59,7 @@ export function parseOperation(sentencia) {
 
   // Operación Theta Join
   if (sentencia.includes("⨝")) {
-    return handleThetaJoin(sentencia);
+    return handleInnerJoin(sentencia);
   }
 
   // Si la sentencia es solo una tabla, se retorna un SELECT * FROM tabla
@@ -100,7 +100,7 @@ export function parseOperation(sentencia) {
   return sql;
 }
 
-function handleThetaJoin(sentence) {
+function handleInnerJoin(sentence) {
   // Dividir la sentencia en las dos tablas y la condición
   const parts = sentence.split('⨝');
   if (parts.length !== 2) {
@@ -123,11 +123,11 @@ function handleThetaJoin(sentence) {
   const sql = `
     SELECT *
     FROM "${leftTable.trim()}" AS ${leftTableAlias.trim()}
-    CROSS JOIN "${rightTableAlias.trim()}" AS ${rightTableAlias.trim()}
-    WHERE ${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}
+    INNER JOIN "${rightTableAlias.trim()}" AS ${rightTableAlias.trim()}
+    ON ${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}
   `;
 
-  console.log("SQL generado para Theta Join:", sql);
+  console.log("SQL generado para Inner join:", sql);
   console.log("Tabla izquierda:", leftTable.trim());
   console.log("Tabla derecha:", rightTableAlias.trim());
   console.log("Condición:", `${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}`);
