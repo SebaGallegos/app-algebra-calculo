@@ -24,7 +24,7 @@ export default function Tab() {
         if (texto.trim() === "" || texto === expresion) {
             return;
         }
-        console.log(`Orden en Algebra: ${texto}`);
+        console.log(`Orden en Calculo: ${texto}`);
         setExpresion(texto);
         setConsulta(texto);
     };
@@ -112,6 +112,36 @@ export default function Tab() {
                 >
                     {"∨"}
                     {/* {"U"} */}
+                </Button>
+                <Button
+                    style={styles.Button}
+                    buttonColor={colores.colors.primary}
+                    mode={"contained"}
+                    onPress={() => {
+                        handleButtonPress("∀"); // Para todo
+                    }}
+                >
+                    {"∀"}
+                </Button>
+                <Button
+                    style={styles.Button}
+                    buttonColor={colores.colors.primary}
+                    mode={"contained"}
+                    onPress={() => {
+                        handleButtonPress("∃"); // Existe
+                    }}
+                >
+                    {"∃"}
+                </Button>
+                <Button
+                    style={styles.Button}
+                    buttonColor={colores.colors.primary}
+                    mode={"contained"}
+                    onPress={() => {
+                        handleButtonPress("→"); // Existe
+                    }}
+                >
+                    {"→"}
                 </Button>
             </ScrollView>
             <View
