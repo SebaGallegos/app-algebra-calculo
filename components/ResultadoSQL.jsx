@@ -6,7 +6,7 @@ export default function Resultado({ sql, data }) {
     return (
         <>
             <View>
-                <Text>Estado de la consulta: {data}</Text>
+                <Text>Sentencia ejecutada.</Text>
             </View>
         </>
     );

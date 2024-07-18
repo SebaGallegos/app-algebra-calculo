@@ -135,9 +135,6 @@ function handleInnerJoin(sentence) {
   return sql.replace(/\n\s*/g, ' ').trim();
 }
 
-
-
-
 function operacionSeleccion(args, tabla) {
   if (args) {
     let condicion = args.replace(/\\"/g, '"').split(",").join(" AND ");

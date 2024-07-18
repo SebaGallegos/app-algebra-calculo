@@ -55,15 +55,15 @@ export default function Resultado({ sql, data }) {
           );
         })}
         <DataTable.Row>
-          <DataTable.Cell style={{ flex: 1 }}>
-            <Text
-              style={{
-                textAlignVertical: "center",
-              }}
-            >
-              SQL generado: {sql}
-            </Text>
-          </DataTable.Cell>
+            <DataTable.Cell style={{ flex: 1, paddingVertical: 20, minHeight: 150 }}>
+                <Text
+                    style={{
+                        textAlignVertical: "center",
+                    }}
+                >
+                    SQL generado: {sql}
+                </Text>
+            </DataTable.Cell>
         </DataTable.Row>
       </DataTable>
     </>
