@@ -119,7 +119,7 @@ function handleInnerJoin(sentence) {
 
   const [, leftTableAlias, leftColumn, rightTableAlias, rightColumn, afterCondition] = match;
 
-  // Construimos la consulta SQL
+  // Se construye la sentencia SQL resultante del inner join
   const sql = `
     SELECT *
     FROM "${leftTable.trim()}" AS ${leftTableAlias.trim()}
