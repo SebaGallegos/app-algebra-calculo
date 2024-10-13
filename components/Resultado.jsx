@@ -12,7 +12,7 @@ export default function Resultado({ sql, data }) {
     return (
       <>
         <ScrollView
-          style={styles.container}
+          style={styles.container2}
           contentContainerStyle={{ justifyContent: "center" }}
         >
           <Text>No se obtuvieron los datos</Text>
@@ -55,15 +55,15 @@ export default function Resultado({ sql, data }) {
           );
         })}
         <DataTable.Row>
-          <DataTable.Cell style={{ flex: 1 }}>
-            <Text
-              style={{
-                textAlignVertical: "center",
-              }}
-            >
-              SQL generado: {sql}
-            </Text>
-          </DataTable.Cell>
+            <DataTable.Cell style={{ flex: 1, paddingVertical: 20, minHeight: 150 }}>
+                <Text
+                    style={{
+                        textAlignVertical: "center",
+                    }}
+                >
+                    SQL generado: {sql}
+                </Text>
+            </DataTable.Cell>
         </DataTable.Row>
       </DataTable>
     </>

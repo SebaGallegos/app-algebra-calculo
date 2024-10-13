@@ -2,15 +2,10 @@ import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
 import { DataTable, Text } from "react-native-paper";
 
-export default function GetColumnas() {
+export default function GetColumnas({ updateKey }) {
   const db = useSQLiteContext();
   const [tablas, setTablas] = useState([]);
   const [columnas, setColumnas] = useState({});
-
-  const traducciones = {
-    name: "nombre",
-    // Agrega aquí las demás traducciones
-  };
 
   useEffect(() => {
     async function getTablas() {
@@ -25,7 +20,7 @@ export default function GetColumnas() {
       }
     }
     getTablas();
-  }, []);
+  }, [updateKey]);
 
   useEffect(() => {
     async function getColumnas() {
@@ -43,7 +38,7 @@ export default function GetColumnas() {
     if (tablas.length > 0) {
       getColumnas();
     }
-  }, [tablas]);
+  }, [tablas, updateKey]);
 
   return (
     <>
@@ -56,7 +51,7 @@ export default function GetColumnas() {
           {columnasTabla.map((columna, index) => (
             <DataTable.Row key={index}>
               <DataTable.Cell>
-                <Text>{traducciones[columna.name] || columna.name}</Text>
+                <Text>{columna.name}</Text>
               </DataTable.Cell>
             </DataTable.Row>
           ))}

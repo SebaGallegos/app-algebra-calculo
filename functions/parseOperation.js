@@ -1,7 +1,12 @@
-/*
- * parseOperation: Función que recibe una sentencia en notación de álgebra relacional
- * y retorna una sentencia SQL equivalente.
- */
+const OPERATIONS = {
+  UNION: [' U ', '\u222A'],
+  INTERSECTION: [' ∩ ', ' \u2229 '],
+  DIFFERENCE: [' - '],
+  SELECTION: ['sel', '\u03C3'],
+  PROJECTION: ['proy', '\u03C0'],
+  JOIN: ['join'],
+  INNER_JOIN: ['⨝']
+};
 
 export function parseOperation(sentencia) {
   // Operación Union
@@ -52,6 +57,11 @@ export function parseOperation(sentencia) {
     }
   }
 
+  // Operación Theta Join
+  if (sentencia.includes("⨝")) {
+    return handleInnerJoin(sentencia);
+  }
+
   // Si la sentencia es solo una tabla, se retorna un SELECT * FROM tabla
   if (/^\w+$/.test(sentencia)) {
     return `SELECT * FROM ${sentencia}`;
@@ -75,33 +85,11 @@ export function parseOperation(sentencia) {
   switch (operacion.toLowerCase()) {
     case "sel":
     case "\u03C3":
-      if (args) {
-        let condicion = args.replace(/\\"/g, '"').split(",").join(" AND ");
-        sql = `SELECT * FROM ${tabla} WHERE ${condicion}`;
-      } else {
-        sql = `SELECT * FROM ${tabla}`;
-      }
+      sql = operacionSeleccion(args, tabla);
       break;
     case "proy":
     case "\u03C0":
-      if (args) {
-        let columnas = args.replace(/\\"/g, '"').split(",").join(", ");
-        // Procesar recursivamente la subconsulta si existe
-        const subMatch = tabla.match(
-          /^([^\s\[\]\(\)]+)(?:\[(.*?)\])?\((.*)\)$/,
-        );
-        if (subMatch) {
-          let subOp = parseOperation(tabla);
-          if (subOp) {
-            sql = `SELECT ${columnas} FROM (${subOp}) AS subquery`;
-          } else {
-            console.log("Sub-operación inválida:", tabla);
-            return null;
-          }
-        } else {
-          sql = `SELECT ${columnas} FROM ${tabla}`;
-        }
-      }
+      sql = operacionProyeccion(args, tabla);
       break;
     default:
       console.log("Operación no soportada:", operacion);
@@ -109,5 +97,72 @@ export function parseOperation(sentencia) {
   }
 
   console.log("SQL generado:", sql);
+  return sql;
+}
+
+function handleInnerJoin(sentence) {
+  // Dividir la sentencia en las dos tablas y la condición
+  const parts = sentence.split('⨝');
+  if (parts.length !== 2) {
+    console.log("La orden de theta-join no tiene el formato correcto:", sentence);
+    return null;
+  }
+
+  const [leftTable, rightPart] = parts;
+
+  // Extraer la condición y la tabla derecha
+  const match = rightPart.match(/^\s*([\w]+)\.([\w]+)\s*=\s*([\w]+)\.([\w]+)\s*([\w\s]+)?$/);
+  if (!match) {
+    console.log("No se pudo extraer la condición y la tabla derecha:", rightPart);
+    return null;
+  }
+
+  const [, leftTableAlias, leftColumn, rightTableAlias, rightColumn, afterCondition] = match;
+
+  // Se construye la sentencia SQL resultante del inner join
+  const sql = `
+    SELECT *
+    FROM "${leftTable.trim()}" AS ${leftTableAlias.trim()}
+    INNER JOIN "${rightTableAlias.trim()}" AS ${rightTableAlias.trim()}
+    ON ${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}
+  `;
+
+  console.log("SQL generado para Inner join:", sql);
+  console.log("Tabla izquierda:", leftTable.trim());
+  console.log("Tabla derecha:", rightTableAlias.trim());
+  console.log("Condición:", `${leftTableAlias.trim()}.${leftColumn.trim()} = ${rightTableAlias.trim()}.${rightColumn.trim()}`);
+
+  return sql.replace(/\n\s*/g, ' ').trim();
+}
+
+function operacionSeleccion(args, tabla) {
+  if (args) {
+    let condicion = args.replace(/\\"/g, '"').split(",").join(" AND ");
+    var sql = `SELECT * FROM ${tabla} WHERE ${condicion}`;
+  } else {
+    var sql = `SELECT * FROM ${tabla}`;
+  }
+
+  return sql;
+}
+
+function operacionProyeccion(args, tabla) {
+  if (args) {
+    let columnas = args.replace(/\\"/g, '"').split(",").join(", ");
+    // Procesar recursivamente la subconsulta si existe
+    const subMatch = tabla.match(/^([^\s\[\]\(\)]+)(?:\[(.*?)\])?\((.*)\)$/);
+    if (subMatch) {
+      let subOp = parseOperation(tabla);
+      if (subOp) {
+        var sql = `SELECT ${columnas} FROM (${subOp}) AS subquery`;
+      } else {
+        console.log("Sub-operación inválida:", tabla);
+        return null;
+      }
+    } else {
+      var sql = `SELECT ${columnas} FROM ${tabla}`;
+    }
+  }
+
   return sql;
 }
