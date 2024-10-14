@@ -72,3 +72,23 @@ Para ejecutar este proyecto localmente, sigue estos pasos:
    ```
 4. Escanear el código QR que aparece en la consola con la aplicación *Expo* disponible para [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www&pli=1) e [iOS](https://apps.apple.com/us/app/expo-go/id982107779).
 5. Una vez escaneado el código QR, la aplicación se ejecutará en el teléfono móvil.
+
+## ⚙️ Compilación de la aplicación
+
+Para compilar la aplicación en Android, se puede realizar mediante la plataforma de [Expo](https://docs.expo.dev/build/setup/), aquí dejaremos los siguientes pasos:
+
+1. Instalar el paquete `eas-cli` mediante el siguiente comando
+   ```bash
+   npm install -g eas-cli
+   ```
+2. Iniciar sesión en la plataforma de *Expo* mediante el comando
+   ```bash
+   eas login
+   ```
+3. Iniciar el trabajo de compilación, esto se hará a través de internet mediante el siguiente comando:
+   ```bash
+   eas build --platform android --profile preview
+   ```
+
+   **Importante:** El argumento `--profile preview` indica a la plataforma de construcción que debe generar un archivo APK (indicado en el archivo [eas.json](https://github.com/SebaGallegos/app-algebra-calculo/blob/main/eas.json)), ya que por defecto, al compilar se genera un archivo AAB, que es el utilizado por Google Play Store para poder distribuir la aplicación a través de su tienda en Android, pero que no nos deja instalarlo manualmente para poder testear la aplicación ([fuente](https://docs.expo.dev/build-reference/apk/)).
+   4. Esperar a que termine la compilación, una vez finalizada, podemos acceder a través de la URL que nos suministra la herramienta y descargar el archivo APK.
