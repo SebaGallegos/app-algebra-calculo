@@ -1,4 +1,4 @@
-# 📚 Proyecto de Titulación: Aprendizaje de Bases de Datos en React Native
+# 📚 Proyecto de Titulación: Aplicación Móvil para computar respuestas a consultas en Álgebra y Cálculo Relacional
 
 Este proyecto fue desarrollado en conjunto por **[Sebastián](https://github.com/SebaGallegos)** y **[Nicolás](https://github.com/NikoMalek)**.
 La aplicación tiene como objetivo facilitar el *aprendizaje interactivo de bases de datos* mediante la visualización de consultas en *álgebra relacional* y *cálculo relacional*, 
@@ -9,7 +9,7 @@ Las consultas se generan utilizando expresiones regulares para extraer la consul
 
 - *Interprete de SQL con SQLite*: Interprete de SQL con SQLite: Los usuarios pueden ingresar, modificar y eliminar tablas en una base de datos SQLite integrada en la aplicación mediante comandos SQL (CREATE, UPDATE, DROP, etc.). 
 - *Álgebra Relacional*: Interfaz dedicada para la construcción de consultas en álgebra relacional. Los usuarios pueden seleccionar símbolos y operadores del álgebra relacional desde un conjunto de botones, y ver el resultado tanto en formato de tabla como en su equivalente en SQL.
-- *Cálculo Relacional*: Similar a la sección de álgebra relacional, esta pantalla permite la creación de consultas utilizando el cálculo relacional, con una visualización del resultado y su equivalente en SQL.
+- *Cálculo Relacional de Tuplas*: Similar a la sección de álgebra relacional, esta pantalla permite la creación de consultas utilizando el cálculo relacional de tuplas, con una visualización del resultado y su equivalente en SQL.
 
 ## 🛠️ Estructura de la Aplicación
 
@@ -37,6 +37,13 @@ Similar a la pantalla de álgebra relacional, pero enfocada en el cálculo relac
   <img src="https://github.com/user-attachments/assets/f8917c52-e1ba-403b-8afa-0d2160450d84" alt="Sql" width="250"/>
 </p>
 
+## Software requerido
+
+Para ejecutar este proyecto se requiere instalar Node.js versión [v20.12.2](https://nodejs.org/dist/v20.12.2/).
+
+> [!NOTE]
+> No se ha probado la ejecución de la aplicación en las versiones más recientes de Node.js, por ende, se recomienda trabajar en la versión especificada ya que es posible que alguna característica no funcione de manera correcta.
+
 ## 🛠️ Instalación
 
 Para ejecutar este proyecto localmente, sigue estos pasos:
@@ -45,6 +52,23 @@ Para ejecutar este proyecto localmente, sigue estos pasos:
    ```bash
    git clone https://github.com/SebaGallegos/app-algebra-calculo.git
    cd app-algebra-calculo
+   ```
 2. Instalar las dependencias:
    ```bash
    npm install
+   ```
+3. Iniciar la aplicación:
+   ```bash
+   npm run start
+   ```
+   **Importante:** registrarse en [Expo](https://expo.dev/signup) para poder ejecutar la aplicación. Una vez registrado, iniciar sesión mediante el siguiente comando:
+
+   ```
+   > npx expo login
+   
+   Log in to EAS with email or username (exit and run 'npx expo login --help' for other login options)
+   √ Email or username ... tuusuario
+   √ Password ... tucontraseña
+   ```
+4. Escanear el código QR que aparece en la consola con la aplicación *Expo* disponible para [Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www&pli=1) e [iOS](https://apps.apple.com/us/app/expo-go/id982107779).
+5. Una vez escaneado el código QR, la aplicación se ejecutará en el teléfono móvil.
