@@ -1,3 +1,10 @@
+/* 
+    calculo.js
+
+    Archivo utilizado para definir la pantalla de Calculo de la aplicación.
+    Se importan los componentes necesarios de React y React Native.
+*/
+
 import { useState, useEffect } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
@@ -48,8 +55,8 @@ export default function Tab() {
     return (
         <View style={styles.container2}>
             <SQLiteProvider
-                databaseName="estudiantes.db"
-                assetSource={{ assetId: require("../../database/estudiantes.db") }}
+                databaseName="database.db"
+                assetSource={{ assetId: require("../../database/database.db") }}
             >
                 {consulta ? (
                     <ParserCalculo sentencia={consulta} />

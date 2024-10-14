@@ -1,5 +1,6 @@
-import Consulta from "./ConsultaSQL";
+// Componente que recibe una sentencia SQL y la ejecuta
 
+import Consulta from "./ConsultaSQL";
 
 export default function ParserSQL({ sentencia }) {
     const SQL = sentencia;

@@ -8,7 +8,7 @@ const OPERATIONS = {
   INNER_JOIN: ['⨝']
 };
 
-export function parseOperation(sentencia) {
+export function conversorAlgebra(sentencia) {
   // Operación Union
   if (sentencia.includes(" U ") || sentencia.includes("\u222A")) {
     // Se divide en dos partes y se procesan recursivamente
@@ -16,8 +16,8 @@ export function parseOperation(sentencia) {
       sentencia = sentencia.replace(" U ", " \u222A ");
     }
     const partes = sentencia.split(" \u222A ");
-    const sql1 = parseOperation(partes[0]);
-    const sql2 = parseOperation(partes[1]);
+    const sql1 = conversorAlgebra(partes[0]);
+    const sql2 = conversorAlgebra(partes[1]);
     if (sql1 && sql2) {
       return `${sql1} UNION ${sql2}`;
     } else {
@@ -33,8 +33,8 @@ export function parseOperation(sentencia) {
       sentencia = sentencia.replace(" ∩ ", " \u2229 ");
     }
     const partes = sentencia.split(" \u2229 ");
-    const sql1 = parseOperation(partes[0]);
-    const sql2 = parseOperation(partes[1]);
+    const sql1 = conversorAlgebra(partes[0]);
+    const sql2 = conversorAlgebra(partes[1]);
     if (sql1 && sql2) {
       return `${sql1} INTERSECT ${sql2}`;
     } else {
@@ -47,8 +47,8 @@ export function parseOperation(sentencia) {
   if (sentencia.includes(" - ")) {
     // Se divide en dos partes y se procesan recursivamente
     const partes = sentencia.split(" - ");
-    const sql1 = parseOperation(partes[0]);
-    const sql2 = parseOperation(partes[1]);
+    const sql1 = conversorAlgebra(partes[0]);
+    const sql2 = conversorAlgebra(partes[1]);
     if (sql1 && sql2) {
       return `${sql1} EXCEPT ${sql2}`;
     } else {
@@ -152,7 +152,7 @@ function operacionProyeccion(args, tabla) {
     // Procesar recursivamente la subconsulta si existe
     const subMatch = tabla.match(/^([^\s\[\]\(\)]+)(?:\[(.*?)\])?\((.*)\)$/);
     if (subMatch) {
-      let subOp = parseOperation(tabla);
+      let subOp = conversorAlgebra(tabla);
       if (subOp) {
         var sql = `SELECT ${columnas} FROM (${subOp}) AS subquery`;
       } else {

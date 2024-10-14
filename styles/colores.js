@@ -1,3 +1,5 @@
+// Variables de colores para el tema de la aplicación
+
 export const colores = {
   colors: {
     primary: "rgb(0, 95, 175)",

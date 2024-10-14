@@ -1,3 +1,5 @@
+// Estilos varios para la aplicación
+
 import { StyleSheet } from "react-native";
 import { colores } from "./colores";
 

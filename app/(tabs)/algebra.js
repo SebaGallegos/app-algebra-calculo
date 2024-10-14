@@ -1,3 +1,10 @@
+/* 
+    algebra.js
+
+    Archivo utilizado para definir la pantalla de Álgebra de la aplicación.
+    Se importan los componentes necesarios de React y React Native.
+*/
+
 import { useState, useEffect } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
@@ -6,7 +13,7 @@ import { SQLiteProvider } from "expo-sqlite";
 import styles from "../../styles/estilos.js";
 import { colores } from "../../styles/colores.js";
 import Parser from "../../components/Parser.jsx";
-import GetColumnas from "../../components/GetColumnas";
+import GetColumnas from "../../components/GetColumnas.jsx";
 
 export default function Tab() {
   const [texto, setTexto] = useState("");
@@ -48,8 +55,8 @@ export default function Tab() {
   return (
     <View style={styles.container2}>
       <SQLiteProvider
-        databaseName="estudiantes.db"
-        assetSource={{ assetId: require("../../database/estudiantes.db") }}
+        databaseName="database.db"
+        assetSource={{ assetId: require("../../database/database.db") }}
       >
         {consulta ? (
           <Parser sentencia={consulta} />

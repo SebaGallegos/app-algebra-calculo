@@ -1,3 +1,5 @@
+// Componente que muestra los resultados de una consulta SQL en una tabla
+
 import { DataTable } from "react-native-paper";
 
 import styles from "../styles/estilos.js";

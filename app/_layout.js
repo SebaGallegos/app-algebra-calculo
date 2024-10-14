@@ -1,3 +1,6 @@
+// Archivo utilizado por defecto para definir las
+// pantallas de la aplicación.
+
 import { Stack } from "expo-router/stack";
 
 export default function Layout() {

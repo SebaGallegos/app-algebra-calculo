@@ -1,3 +1,5 @@
+// Componente que muestra en una tabla el nombre de las tablas y sus columnas
+
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
 import { DataTable, Text } from "react-native-paper";

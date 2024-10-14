@@ -1,3 +1,10 @@
+/*
+    sql.js
+
+    Archivo utilizado para definir la pantalla de SQL de la aplicación.
+    Se importan los componentes necesarios de React y React Native.
+*/
+
 import { useState, useEffect } from "react";
 import { ScrollView, Text, View, Dimensions, StyleSheet, Modal } from "react-native";
 import styles from "../../styles/estilos";
@@ -24,15 +31,13 @@ export default function Tab() {
     setExpresion(texto);
     setConsulta(texto);
 
-    // Aquí deberías procesar la consulta SQL y obtener los resultados
-    // Por ahora, simplemente mostraremos el texto de la consulta como resultado
     setModalVisible(true);
   };
 
   return (
       <SQLiteProvider
-          databaseName="estudiantes.db"
-          assetSource={{ assetId: require("../../database/estudiantes.db") }}
+          databaseName="database.db"
+          assetSource={{ assetId: require("../../database/database.db") }}
       >
         <View style={localStyles.container}>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

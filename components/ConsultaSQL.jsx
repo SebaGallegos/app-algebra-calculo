@@ -1,3 +1,5 @@
+// Componente para ejecutar sentencias SQL directo en la base de datos
+
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
 import Resultado from "./ResultadoSQL";

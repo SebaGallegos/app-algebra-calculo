@@ -1,3 +1,6 @@
+// Componente que ejecuta una consulta SQL proveniente de una operación
+// en álgebra relacional o cálculo relacional de tuplas
+
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
 import Resultado from "./Resultado";
