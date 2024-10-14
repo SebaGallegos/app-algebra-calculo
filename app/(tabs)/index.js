@@ -1,5 +1,5 @@
 /* 
-    algebra.js
+    index.js
 
     Archivo utilizado para definir la pantalla de Álgebra de la aplicación.
     Se importan los componentes necesarios de React y React Native.

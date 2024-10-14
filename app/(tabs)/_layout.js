@@ -12,7 +12,7 @@ export default function TabLayout() {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
       <Tabs.Screen
-        name="algebra"
+        name="index" // pantalla de álgebra
         options={{
           title: "Álgebra",
           tabBarIcon: ({ color }) => (
