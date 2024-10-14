@@ -90,6 +90,6 @@ Para compilar la aplicación en Android, se puede realizar mediante la plataform
    eas build --platform android --profile preview
    ```
 
-   **Importante:** El argumento `--profile preview` indica a la plataforma de construcción que debe generar un archivo APK (indicado en el archivo [eas.json](https://github.com/SebaGallegos/app-algebra-calculo/blob/main/eas.json)), ya que por defecto, al compilar se genera un archivo AAB, que es el utilizado por Google Play Store para poder distribuir la aplicación a través de su tienda en Android, pero que no nos deja instalarlo manualmente para poder testear la aplicación ([fuente](https://docs.expo.dev/build-reference/apk/)).
+   **Importante:** El argumento `--profile preview` indica a la plataforma de construcción que debe generar un archivo APK (indicado en el archivo [eas.json](https://github.com/SebaGallegos/app-algebra-calculo/blob/main/eas.json)), ya que por defecto, al compilar se genera un archivo AAB, que es el utilizado por Google Play Store para poder distribuir la aplicación a través de su tienda en Android, pero que no se puede instalar manualmente para poder testear la aplicación. Para más información visite la [documentación](https://docs.expo.dev/build-reference/apk/).
    
 4. Esperar a que termine la compilación, una vez finalizada, podemos acceder a través de la URL que nos suministra la herramienta y descargar el archivo APK.
