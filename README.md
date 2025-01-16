@@ -7,7 +7,7 @@ Las consultas se generan utilizando expresiones regulares para extraer la consul
 
 ## 🚀 Funcionalidades Principales
 
-- *Interprete de SQL con SQLite*: Interprete de SQL con SQLite: Los usuarios pueden ingresar, modificar y eliminar tablas en una base de datos SQLite integrada en la aplicación mediante comandos SQL (CREATE, UPDATE, DROP, etc.). 
+- *Interprete de SQL con SQLite*: Los usuarios pueden ingresar, modificar y eliminar tablas en una base de datos SQLite integrada en la aplicación mediante comandos SQL (CREATE, UPDATE, DROP, etc.). 
 - *Álgebra Relacional*: Interfaz dedicada para la construcción de consultas en álgebra relacional. Los usuarios pueden seleccionar símbolos y operadores del álgebra relacional desde un conjunto de botones, y ver el resultado tanto en formato de tabla como en su equivalente en SQL.
 - *Cálculo Relacional de Tuplas*: Similar a la sección de álgebra relacional, esta pantalla permite la creación de consultas utilizando el cálculo relacional de tuplas, con una visualización del resultado y su equivalente en SQL.
 
